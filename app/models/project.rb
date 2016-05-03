@@ -6,7 +6,14 @@ class Project
   end
 
   def done?
-    @tasks.empty?
+    @tasks.reject(&:complete?).empty?
   end
 
+  def total_size
+    tasks.sum(&:size)
+  end
+
+  def remaining_size
+    tasks.reject(&:complete?).sum(&:size)
+  end
 end
